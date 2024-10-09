@@ -7,18 +7,13 @@ void runLengthEncode(const char *input, char *output) {
     int length = strlen(input);
 
     for (i = 0; i < length; i++) {
-        // Count occurrences of input[i]
         count = 1;
         while (i + 1 < length && input[i] == input[i + 1]) {
             count++;
             i++;
         }
-
-        // Store the character and its count in output
         j += sprintf(&output[j], "%c%d", input[i], count);
     }
-
-    // Null-terminate the output string
     output[j] = '\0';
 }
 
