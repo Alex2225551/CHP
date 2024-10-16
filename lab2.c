@@ -1,39 +1,52 @@
 #include <stdio.h>
+#include <string.h>
 
-void encrypt(char *text, int shift) {
-    for (int i = 0; text[i] != '\0'; i++) {
-        char ch = text[i];
-        if (ch >= 'a' && ch <= 'z') {
-            ch = (ch - 'a' + shift) % 26 + 'a'; 
-        } else if (ch >= 'A' && ch <= 'Z') {
-            ch = (ch - 'A' + shift) % 26 + 'A'; 
+void encode(char l[]) {
+    char a[27] = "abcdefghijklmnopqrstuvwxyz";
+    char b[27] = "qwertyuiopasdfghjklzxcvbnm";
+
+    int k = strlen(l);
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 26; j++) {
+            if (l[i] == a[j]) {
+                l[i] = b[j];
+                break;
+            }
         }
-        text[i] = ch;
     }
 }
 
-void decrypt(char *text, int shift) {
-    encrypt(text, 26 - (shift % 26)); 
+void decode(char l[]) {
+    char a[27] = "abcdefghijklmnopqrstuvwxyz";
+    char b[27] = "qwertyuiopasdfghjklzxcvbnm";
+
+    int k = strlen(l);
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 26; j++) {
+            if (l[i] == b[j]) {
+                l[i] = a[j];
+                break;
+            }
+        }
+    }
 }
 
 int main() {
-    char text[100];
-    int shift;
+    char c[100];
+    printf("Enter the text: ");
+    fgets(c, sizeof(c), stdin);
 
-    
-    printf("Enter text: ");
-    scanf("%99[^\n]", text); 
+    // Remove the newline character if it exists
+    size_t len = strlen(c);
+    if (len > 0 && c[len - 1] == '\n') {
+        c[len - 1] = '\0';
+    }
 
-    
-    printf("Enter key (1-25): ");
-    scanf("%d", &shift);
+    encode(c);
+    printf("Encoded: %s\n", c);
 
-    
-    encrypt(text, shift);
-    printf("Encrypted text: %s\n", text);
-    
-    decrypt(text, shift);
-    printf("Decrypted text: %s\n", text);
+    decode(c);
+    printf("Decoded: %s\n", c);
 
     return 0;
 }
