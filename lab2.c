@@ -36,7 +36,6 @@ int main() {
     printf("Enter the text: ");
     fgets(c, sizeof(c), stdin);
 
-    // Remove the newline character if it exists
     size_t len = strlen(c);
     if (len > 0 && c[len - 1] == '\n') {
         c[len - 1] = '\0';
