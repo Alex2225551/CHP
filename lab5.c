@@ -19,7 +19,7 @@ void runLengthEncode(const char *input, char *output) {
 
 int main() {
     const char *input = "aaabbbccdaa";
-    char output[100]; // Ensure this is large enough to hold the output
+    char output[100]; 
 
     runLengthEncode(input, output);
     printf("Input: %s\n", input);
